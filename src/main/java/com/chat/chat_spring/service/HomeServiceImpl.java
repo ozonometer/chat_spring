@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class HomeServiceImpl implements HomeService{
+public class HomeServiceImpl implements HomeService {
 
     final ChatRepository chatRepository;
 

@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface ChatRepository extends MongoRepository<ChatThread, String> {
+public interface ChatRepository extends MongoRepository<ChatThread, Integer> {
 
     List<ChatThread> findAll();
 }

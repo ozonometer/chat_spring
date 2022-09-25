@@ -1,12 +1,15 @@
 package com.chat.chat_spring.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "chatThread")
 public class ChatThread {
 
@@ -14,16 +17,13 @@ public class ChatThread {
     @JsonProperty("_id")
     private String id;
 
-    @Getter @Setter
     @JsonProperty("orderId")
     private Integer orderId;
 
 
-    @Getter @Setter
     @JsonProperty("threadName")
     private String threadName;
 
-    @Getter @Setter
     @JsonProperty("date")
     private String date;
 
