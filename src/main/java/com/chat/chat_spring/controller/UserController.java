@@ -14,6 +14,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,6 +52,10 @@ public class UserController {
 
     @PostMapping(path = "/createUser", consumes = "application/json", produces = "application/json")
     public ResponseEntity<UserModel> addMember(@RequestBody @Valid UserDto userDto) {
+        UserModel existingUser = userService.findByUserName(userDto.getUserName());
+        if (!ObjectUtils.isEmpty(existingUser)) { // username already in use
+            return new ResponseEntity<>(new UserModel(), HttpStatus.NOT_ACCEPTABLE);
+        }
         UserModel userModelRequest = modelMapper.map(userDto, UserModel.class);
         UserModel savedUserModel =  userService.saveOrUpdate(userModelRequest);
         return new ResponseEntity<>(savedUserModel, HttpStatus.OK);
