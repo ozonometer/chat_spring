@@ -1,6 +1,7 @@
 package com.chat.chat_spring.controller;
 
 import com.chat.chat_spring.dto.UserDto;
+import com.chat.chat_spring.dto.UserModelDto;
 import com.chat.chat_spring.model.AuthRequest;
 import com.chat.chat_spring.model.AuthResponse;
 import com.chat.chat_spring.model.UserModel;
@@ -15,8 +16,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +58,8 @@ public class UserController {
             return new ResponseEntity<>(new UserModel(), HttpStatus.NOT_ACCEPTABLE);
         }
         UserModel userModelRequest = modelMapper.map(userDto, UserModel.class);
+        UserModel foundUser = userService.findUserMaxId();
+        userModelRequest.setUserId(foundUser.getUserId() + 1);
         UserModel savedUserModel =  userService.saveOrUpdate(userModelRequest);
         return new ResponseEntity<>(savedUserModel, HttpStatus.OK);
     }
@@ -73,8 +76,22 @@ public class UserController {
         }
         UserDetails loadedUser = userService.loadUserByUsername(authRequest.getUserName());
         authResponse.setToken(jwtUtils.generateToken(loadedUser));
+        authResponse.setUserId(userService.findByUserName(loadedUser.getUsername()).getUserId());
         authResponse.setMessage("User authenticated.");
         return new ResponseEntity<>(authResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<UserModel> getUser(@PathVariable("id") int id) {
+        UserModel userModel = userService.getUserUserById(id);
+        return new ResponseEntity<>(userModel, HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/updateUser", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<UserModel> addMember(@RequestBody @Valid UserModelDto userModelDto) {
+        UserModel userModelDtoRequest = modelMapper.map(userModelDto, UserModel.class);
+        UserModel updatedUser =  userService.updateUser(userModelDtoRequest);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
 }

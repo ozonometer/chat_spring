@@ -28,7 +28,7 @@ public class UserService implements UserDetailsService {
         return userRepository.save(userModel);
     }
 
-    public UserModel getUserById(Integer id) {
+    public UserModel getUserUserById(Integer id) {
         return userRepository.findUserByUserId(id);
     }
 
@@ -38,6 +38,14 @@ public class UserService implements UserDetailsService {
 
     public UserModel findByUserName(String username) {
         return userRepository.findFirstByUserName(username);
+    }
+
+    public UserModel updateUser(UserModel user) {
+        return userRepository.save(user);
+    }
+
+    public UserModel findUserMaxId() {
+        return userRepository.findFirstByOrderByUserIdDesc();
     }
 
     @Override
