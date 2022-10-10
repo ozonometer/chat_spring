@@ -1,10 +1,13 @@
 package com.chat.chat_spring.controller;
 
+import com.chat.chat_spring.dto.ImageDTO;
 import com.chat.chat_spring.dto.UserDto;
 import com.chat.chat_spring.dto.UserModelDto;
 import com.chat.chat_spring.model.AuthRequest;
 import com.chat.chat_spring.model.AuthResponse;
+import com.chat.chat_spring.model.Picture;
 import com.chat.chat_spring.model.UserModel;
+import com.chat.chat_spring.service.PictureService;
 import com.chat.chat_spring.service.UserService;
 import com.chat.chat_spring.utils.JwtUtils;
 import org.modelmapper.ModelMapper;
@@ -21,8 +24,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.Base64;
 import java.util.List;
 
 @Controller
@@ -35,13 +41,16 @@ public class UserController {
 
     final ModelMapper modelMapper;
 
+    final PictureService pictureService;
+
     final JwtUtils jwtUtils;
 
     public UserController(UserService userService, AuthenticationManager authenticationManager,
-                          ModelMapper modelMapper, JwtUtils jwtUtils) {
+                          ModelMapper modelMapper, PictureService pictureService, JwtUtils jwtUtils) {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
         this.modelMapper = modelMapper;
+        this.pictureService = pictureService;
         this.jwtUtils = jwtUtils;
     }
 
@@ -60,7 +69,7 @@ public class UserController {
         UserModel userModelRequest = modelMapper.map(userDto, UserModel.class);
         UserModel foundUser = userService.findUserMaxId();
         userModelRequest.setUserId(foundUser.getUserId() + 1);
-        UserModel savedUserModel =  userService.saveOrUpdate(userModelRequest);
+        UserModel savedUserModel = userService.saveOrUpdate(userModelRequest);
         return new ResponseEntity<>(savedUserModel, HttpStatus.OK);
     }
 
@@ -90,8 +99,33 @@ public class UserController {
     @PostMapping(path = "/updateUser", consumes = "application/json", produces = "application/json")
     public ResponseEntity<UserModel> addMember(@RequestBody @Valid UserModelDto userModelDto) {
         UserModel userModelDtoRequest = modelMapper.map(userModelDto, UserModel.class);
-        UserModel updatedUser =  userService.updateUser(userModelDtoRequest);
+        UserModel updatedUser = userService.updateUser(userModelDtoRequest);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
+    @PostMapping("/addUserPicture/{userId}")
+    public ResponseEntity<Boolean> addPhoto(@RequestParam("picture") MultipartFile picture, @PathVariable Integer userId) {
+        pictureService.addPicture("User picture for user id " + userId, picture, userId);
+        return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
+    @GetMapping("/getUserPicture/{id}")
+    public ResponseEntity<ImageDTO> getPicture(@PathVariable Integer id) {
+        Picture picture = pictureService.getPictureByUserId(id);
+        ImageDTO imageDTO = new ImageDTO();
+        if (picture != null) {
+            imageDTO.setImage(Base64.getEncoder().encodeToString(picture.getImage().getData()));
+            imageDTO.setId(picture.getId());
+        } else {
+            imageDTO.setImage("");
+        }
+        return new ResponseEntity<>(imageDTO, HttpStatus.OK);
+    }
+
+    @PostMapping("/deleteUserPicture/{id}")
+    public ResponseEntity<Boolean> deletePicture(@PathVariable String id) {
+        pictureService.deletePicture(id);
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
 }
