@@ -26,9 +26,9 @@ class ChatRepositoryTest {
         // arrange
         chatRepoTest.deleteAll();
         List<ChatThread> threadList = new LinkedList<>();
-        threadList.add(new ChatThread("1", 1, "test_thread_name", "01/01/2000"));
-        threadList.add(new ChatThread("2", 2, "test_thread_name2", "01/01/2000"));
-        threadList.add(new ChatThread("3", 3, "test_thread_name3", "01/01/2000"));
+        threadList.add(new ChatThread("1", 1, 1, "admin", "test_thread_name", "test_thread_description", "01/01/2000"));
+        threadList.add(new ChatThread("2", 2, 2, "admin2", "test_thread_name2", "test_thread_description2", "01/01/2000"));
+        threadList.add(new ChatThread("3", 3, 3, "admin3", "test_thread_name3", "test_thread_description3", "01/01/2000"));
         chatRepoTest.saveAll(threadList);
 
         // act

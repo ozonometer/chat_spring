@@ -17,23 +17,34 @@ public class ChatThread {
     @JsonProperty("_id")
     private String id;
 
-    @JsonProperty("orderId")
-    private Integer orderId;
+    @JsonProperty("threadId")
+    private Integer threadId;
 
+    @JsonProperty("authorId")
+    private Integer authorId;
+
+    @JsonProperty("authorUserName")
+    private String authorUserName;
 
     @JsonProperty("threadName")
     private String threadName;
 
-    @JsonProperty("date")
-    private String date;
+    @JsonProperty("threadDescription")
+    private String threadDescription;
+
+    @JsonProperty("createdDate")
+    private String createdDate;
 
     @Override
     public String toString() {
         return "ChatThread{" +
-                "id=" + id +
-                ", orderId='" + orderId + '\'' +
+                "id='" + id + '\'' +
+                ", threadId=" + threadId +
+                ", authorId=" + authorId +
+                ", authorUserName='" + authorUserName + '\'' +
                 ", threadName='" + threadName + '\'' +
-                ", date='" + date + '\'' +
+                ", threadDescription='" + threadDescription + '\'' +
+                ", createdDate='" + createdDate + '\'' +
                 '}';
     }
 }

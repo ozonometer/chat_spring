@@ -1,5 +1,5 @@
 package com.chat.chat_spring.utils;
 
 public final class Constants {
-    public static final String BACK_END_VERSION = "b0.1v";
+    public static final String BACK_END_VERSION = "1.0v";
 }
