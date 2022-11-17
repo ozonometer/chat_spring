@@ -8,4 +8,7 @@ import java.util.List;
 public interface ChatRepository extends MongoRepository<ChatThread, Integer> {
 
     List<ChatThread> findAll();
+    ChatThread findFirstByOrderByThreadIdDesc();
+    ChatThread findFirstByThreadName(String threadName);
+    ChatThread findFirstByThreadId(Integer id);
 }

@@ -19,4 +19,21 @@ public class HomeServiceImpl implements HomeService {
     public List<ChatThread> getAllThreads() {
         return chatRepository.findAll();
     }
+
+    public ChatThread findThreadMaxId() {
+        return chatRepository.findFirstByOrderByThreadIdDesc();
+    }
+
+    public ChatThread findByThreadName(String threadName) {
+        return chatRepository.findFirstByThreadName(threadName);
+    }
+
+    public ChatThread saveOrUpdate(ChatThread chatThread) {
+        return chatRepository.save(chatThread);
+    }
+
+    @Override
+    public ChatThread getOneByThreadId(Integer theadId) {
+        return chatRepository.findFirstByThreadId(theadId);
+    }
 }
