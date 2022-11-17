@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -24,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(UserController.class)
 @ActiveProfiles("test")
+@WithMockUser
 @AutoConfigureMockMvc(addFilters = false) //todo find out how to add the filters into the test, this is probably an important part of the process...
 class UserControllerTest {
     @Autowired
@@ -41,7 +43,7 @@ class UserControllerTest {
     private JwtFilterRequest jwtTest;
 
     @Test
-    void getProjects() throws Exception {
+    void shouldGetAllUsers() throws Exception {
         // arrange
         UserModel user1 = new UserModel("001", 1, "test", "user", "test_user",
                 "test_password","test_city", "test_state", "test_zipcode", "test_country");
@@ -73,7 +75,8 @@ class UserControllerTest {
     }
 
     @Test
-    void addMember() {
+    void shouldAddMember() {
+        //when()..thenReturn(Optional.of(user));
     }
 
     @Test
