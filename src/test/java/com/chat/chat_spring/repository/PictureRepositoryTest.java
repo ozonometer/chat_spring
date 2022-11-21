@@ -21,9 +21,8 @@ class PictureRepositoryTest {
     @Test
     void shouldGetPictureByUserId() {
         // arrange
-        Picture pic = new Picture(
-                "001", 1, "test picture", new Binary(new byte[123456])
-        );
+        picRepoTest.deleteAll();
+        Picture pic = new Picture("001", 1, "test picture", new Binary(new byte[123456]));
         picRepoTest.save(pic);
 
         // act
