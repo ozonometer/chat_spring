@@ -50,7 +50,7 @@ public class HomeController {
     }
 
     @GetMapping("/getThead/{id}")
-    public ResponseEntity<ChatThread> getPicture(@PathVariable Integer id) {
+    public ResponseEntity<ChatThread> getThread(@PathVariable Integer id) {
         ChatThread chatThread = homeService.getOneByThreadId(id);
         return new ResponseEntity<>(chatThread, HttpStatus.OK);
     }
