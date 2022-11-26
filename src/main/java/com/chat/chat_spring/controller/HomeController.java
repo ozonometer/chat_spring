@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -53,5 +54,16 @@ public class HomeController {
     public ResponseEntity<ChatThread> getThread(@PathVariable Integer id) {
         ChatThread chatThread = homeService.getOneByThreadId(id);
         return new ResponseEntity<>(chatThread, HttpStatus.OK);
+    }
+
+    @PostMapping("/find")
+    public ResponseEntity<List<ChatThread>> getThreadsByKeyword(@RequestParam("keyword") String keyword) {
+        List<ChatThread> chatThreads;
+        if (!keyword.isEmpty()){
+            chatThreads = homeService.getAllByKeyword(keyword);
+        } else {
+            chatThreads = homeService.getAllThreads();
+        }
+        return new ResponseEntity<>(chatThreads, HttpStatus.OK);
     }
 }
