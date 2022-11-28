@@ -29,6 +29,6 @@ class PictureRepositoryTest {
         Picture result = picRepoTest.getByUserId(1);
 
         // assert
-        assertEquals(pic.getUserId(), result.getUserId());
+        assertEquals(pic, result);
     }
 }

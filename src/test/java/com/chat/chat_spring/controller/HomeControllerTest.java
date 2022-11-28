@@ -70,7 +70,7 @@ class HomeControllerTest {
 
         //assert
         mockMvc.perform(get("/threads/all"))
-                .andExpect(status().is2xxSuccessful())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.*._id").isNotEmpty())
                 .andExpect(jsonPath("$.*.threadId").isNotEmpty())
                 .andExpect(jsonPath("$.*.authorId").isNotEmpty())
@@ -114,7 +114,7 @@ class HomeControllerTest {
 
         // assert
         mockMvc.perform(get("/threads/getThead/{id}", 1))
-                .andExpect(status().is2xxSuccessful())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$._id").isNotEmpty())
                 .andExpect(jsonPath("$.threadId").isNotEmpty())
                 .andExpect(jsonPath("$.authorId").isNotEmpty())

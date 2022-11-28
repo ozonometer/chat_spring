@@ -85,13 +85,17 @@ class UserRepositoryTest {
         userRepoTest.deleteAll();
         UserModel user1 = new UserModel("001", 1, "test", "user", "test_user",
                 "test_password","test_city", "test_state", "test_zipcode", "test_country");
+        UserModel user2 = new UserModel("002", 2, "test2", "user2", "test_user",
+                "test_password2","test_city2", "test_state2", "test_zipcode2", "test_country2");
         userRepoTest.save(user1);
+        userRepoTest.save(user2);
 
         // act
         UserModel result = userRepoTest.findFirstByUserName("test_user");
 
         // assert
         assertEquals(user1, result);
+        assertNotEquals(user2, result);
     }
 
     @Test
