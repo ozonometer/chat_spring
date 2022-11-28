@@ -2,6 +2,7 @@ package com.chat.chat_spring.repository;
 
 import com.chat.chat_spring.model.ChatThread;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ public interface ChatRepository extends MongoRepository<ChatThread, Integer> {
     ChatThread findFirstByOrderByThreadIdDesc();
     ChatThread findFirstByThreadName(String threadName);
     ChatThread findFirstByThreadId(Integer id);
+    @Query(value = "{'threadName': {$regex : ?0, $options: 'i'}}")
+    List<ChatThread> findAllByThreadName(String threadName);
 }

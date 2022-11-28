@@ -10,4 +10,5 @@ public interface HomeService {
     ChatThread findByThreadName(String threadName);
     ChatThread saveOrUpdate(ChatThread chatThread);
     ChatThread getOneByThreadId(Integer theadId);
+    List<ChatThread> getAllByKeyword(String keyword);
 }

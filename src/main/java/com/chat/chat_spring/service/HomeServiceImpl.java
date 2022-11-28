@@ -36,4 +36,9 @@ public class HomeServiceImpl implements HomeService {
     public ChatThread getOneByThreadId(Integer theadId) {
         return chatRepository.findFirstByThreadId(theadId);
     }
+
+    @Override
+    public List<ChatThread> getAllByKeyword(String keyword) {
+        return chatRepository.findAllByThreadName(keyword);
+    }
 }
