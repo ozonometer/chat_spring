@@ -25,7 +25,7 @@ class PictureServiceIntTest {
     private PictureServiceInt pictureServiceIntTest;
 
     @Test
-    void addPicture() {
+    void shouldAddPicture() {
         // arrange
         Picture pic = new Picture(null, 1, "test picture", new Binary(new byte[123456]));
 
@@ -52,7 +52,7 @@ class PictureServiceIntTest {
     }
 
     @Test
-    void deletePicture() {
+    void shouldDeletePicture() {
         // arrange
         Picture pic = new Picture("001", 1, "test picture", new Binary(new byte[123456]));
 

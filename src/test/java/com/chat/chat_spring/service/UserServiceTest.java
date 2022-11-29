@@ -70,7 +70,7 @@ class UserServiceTest {
     }
 
     @Test
-    void shouldGetUserUserById() {
+    void shouldGetUserByUserId() {
         // arrange
 
         // act
@@ -121,17 +121,18 @@ class UserServiceTest {
     @Test
     void shouldFindUserMaxId() {
         // arrange
+        UserModel last = userList.get(userList.size()-1);
 
         // act
-        when(userRepositoryTest.findFirstByOrderByUserIdDesc()).thenReturn(userList.get(userList.size()-1));
+        when(userRepositoryTest.findFirstByOrderByUserIdDesc()).thenReturn(last);
         UserModel result = userServiceTest.findUserMaxId();
 
         // assert
-        assertEquals(userList.get(userList.size()-1), result);
+        assertEquals(last, result);
     }
 
     @Test
-    void loadUserByUsername() {
+    void shouldLoadUserByUsername() {
         // arrange
 
         // act

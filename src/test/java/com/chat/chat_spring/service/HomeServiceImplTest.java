@@ -102,4 +102,16 @@ class HomeServiceImplTest {
         //assert
         assertEquals(result, thread1);
     }
+
+    @Test
+    void shouldGetAllByKeyword() {
+        //arrange
+
+        // act
+        when(chatRepositoryTest.findAllByThreadName(any())).thenReturn(threadList);
+        List<ChatThread> result = homeServiceTest.getAllByKeyword("keyword");
+
+        // assert
+        assertEquals(result, threadList);
+    }
 }

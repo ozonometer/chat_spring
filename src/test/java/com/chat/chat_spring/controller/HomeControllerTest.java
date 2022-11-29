@@ -124,4 +124,61 @@ class HomeControllerTest {
                 .andExpect(jsonPath("$.createdDate").isNotEmpty())
                 .andDo(print());
     }
+
+    @Test
+    void shouldGetThreadsByKeywordWithKeyword() throws Exception {
+        // arrange
+        List<ChatThread> threadList = new LinkedList<>();
+        ChatThread thread1 = new ChatThread("1", 1, 1, "admin",
+                "test_thread_name", "test_thread_description", "01/01/2000");
+        ChatThread thread2 = new ChatThread("2", 2, 2, "admin2",
+                "test_thread_name2", "test_thread_description2", "01/01/2000");
+        ChatThread thread3 = new ChatThread("3", 3, 3, "admin3",
+                "test_thread_name3", "test_thread_description3", "01/01/2000");
+        threadList.add(thread1);
+        threadList.add(thread3);
+
+        // act
+        given(homeServiceTest.getAllByKeyword(any())).willReturn(threadList);
+
+        // assert
+        mockMvc.perform(post("/threads/find")
+                        .param("keyword", "keyword")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(threadList))
+                        .header("Access-Control-Allow-Methods", "POST")
+                        .header("Origin", "*"))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    void shouldGetThreadsByKeywordWithoutKeyword() throws Exception {
+        // arrange
+        List<ChatThread> threadList = new LinkedList<>();
+        ChatThread thread1 = new ChatThread("1", 1, 1, "admin",
+                "test_thread_name", "test_thread_description", "01/01/2000");
+        ChatThread thread2 = new ChatThread("2", 2, 2, "admin2",
+                "test_thread_name2", "test_thread_description2", "01/01/2000");
+        ChatThread thread3 = new ChatThread("3", 3, 3, "admin3",
+                "test_thread_name3", "test_thread_description3", "01/01/2000");
+        threadList.add(thread1);
+        threadList.add(thread2);
+        threadList.add(thread3);
+
+        // act
+        given(homeServiceTest.getAllThreads()).willReturn(threadList);
+
+        // assert
+        mockMvc.perform(post("/threads/find")
+                        .param("keyword", "")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(threadList))
+                        .header("Access-Control-Allow-Methods", "POST")
+                        .header("Origin", "*"))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
 }
