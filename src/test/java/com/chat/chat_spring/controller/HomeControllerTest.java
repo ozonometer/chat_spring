@@ -51,6 +51,11 @@ class HomeControllerTest {
     @MockBean
     private ModelMapper modelMapperTest;
 
+    /**
+     * Test case 1
+     * Requirement 1.1.2
+     * @throws Exception
+     */
     @Test
     void shouldGetAllThreads() throws Exception {
         // arrange
@@ -81,6 +86,11 @@ class HomeControllerTest {
                 .andDo(print());
     }
 
+    /**
+     * Test case 2
+     * Requirement 1.2.1
+     * @throws Exception
+     */
     @Test
     void shouldCreateThread() throws Exception {
         // arrange
@@ -103,6 +113,11 @@ class HomeControllerTest {
                 .andDo(print());
     }
 
+    /**
+     * Test case 3
+     * Requirement 1.1.2
+     * @throws Exception
+     */
     @Test
     void shouldGetThread() throws Exception {
         // arrange
@@ -125,6 +140,11 @@ class HomeControllerTest {
                 .andDo(print());
     }
 
+    /**
+     * Test case 19
+     * Requirement 1.1.2
+     * @throws Exception
+     */
     @Test
     void shouldGetThreadsByKeywordWithKeyword() throws Exception {
         // arrange
@@ -153,6 +173,11 @@ class HomeControllerTest {
                 .andDo(print());
     }
 
+    /**
+     * Test case 20
+     * Requirement 1.1.2
+     * @throws Exception
+     */
     @Test
     void shouldGetThreadsByKeywordWithoutKeyword() throws Exception {
         // arrange

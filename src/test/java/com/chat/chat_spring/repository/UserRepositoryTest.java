@@ -21,6 +21,11 @@ class UserRepositoryTest {
     @Autowired
     private UserRepository userRepoTest;
 
+    /**
+     * Test case 14
+     * Requirement 1.1.1, 3.1.1, and 3.1.2
+     * @throws Exception
+     */
     @Test
     void shouldFindAll() {
         // arrange
@@ -41,6 +46,11 @@ class UserRepositoryTest {
         assertEquals(userList, result);
     }
 
+    /**
+     * Test case 15
+     * Requirement 1.1.1, 3.1.1, and 3.1.2
+     * @throws Exception
+     */
     @Test
     void shouldFindUserByUserName() {
         // arrange
@@ -64,7 +74,11 @@ class UserRepositoryTest {
         assertEquals(userList, result);
     }
 
-    @Test
+    /**
+     * Test case 16
+     * Requirement 1.1.1, 3.1.1, and 3.1.2
+     * @throws Exception
+     */@Test
     void shouldFindUserByUserId() {
         // arrange
         userRepoTest.deleteAll();
@@ -79,7 +93,11 @@ class UserRepositoryTest {
         assertEquals(user1, result);
     }
 
-    @Test
+    /**
+     * Test case 17
+     * Requirement 1.1.1, 3.1.1, and 3.1.2
+     * @throws Exception
+     */@Test
     void shouldFindFirstByUserName() {
         // arrange
         userRepoTest.deleteAll();
@@ -98,7 +116,11 @@ class UserRepositoryTest {
         assertNotEquals(user2, result);
     }
 
-    @Test
+    /**
+     * Test case 18
+     * Requirement 1.1.1, 3.1.1, and 3.1.2
+     * @throws Exception
+     */@Test
     void shouldFindFirstByOrderByUserIdDesc() {
         // arrange
         userRepoTest.deleteAll();
