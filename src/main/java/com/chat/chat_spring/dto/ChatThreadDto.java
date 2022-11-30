@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * Requirement 2, handle and process HTTP requests.
+ * Data Transfer Object for thread object
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

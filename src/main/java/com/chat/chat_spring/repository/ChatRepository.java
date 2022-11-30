@@ -6,6 +6,10 @@ import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
 
+/**
+ * Requirement 2.1.1 Spring Boot, communicate with MongoDB
+ * Chat Thread Repository
+ */
 public interface ChatRepository extends MongoRepository<ChatThread, Integer> {
 
     List<ChatThread> findAll();

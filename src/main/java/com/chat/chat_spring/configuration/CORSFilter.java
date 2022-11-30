@@ -14,6 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Requirement 2, handle and process HTTP requests.
+ * This configuration disables CORS, front-end and back-end are deployed on different ports and CORS was
+ * has to be disabled to allow http requests
+ */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORSFilter implements Filter {

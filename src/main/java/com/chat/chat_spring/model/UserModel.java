@@ -10,6 +10,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * Requirement 2.1.1 Spring Boot, communicate with MongoDB
+ * User repository model
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
