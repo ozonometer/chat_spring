@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * Requirement 2.1.1 Spring Boot, communicate with MongoDB
+ * Chat thread repository model
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

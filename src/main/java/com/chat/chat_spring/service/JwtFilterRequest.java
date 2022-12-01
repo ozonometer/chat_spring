@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Requirement 2, handle and process HTTP requests.
+ * JWT token filter, validates JWT token
+ */
 @Component
 public class JwtFilterRequest extends OncePerRequestFilter {
 

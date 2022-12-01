@@ -6,6 +6,10 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+/**
+ * Requirement 2.1.1 Spring Boot, communicate with MongoDB
+ * User Repository
+ */
 public interface UserRepository extends MongoRepository<UserModel, String> {
 
     List<UserModel> findAll();

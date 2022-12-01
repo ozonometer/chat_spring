@@ -31,6 +31,10 @@ import javax.validation.Valid;
 import java.util.Base64;
 import java.util.List;
 
+/**
+ * Requirement 2, handle and process HTTP requests.
+ * Controller to handle http request from profile (user) page.
+ */
 @Controller
 @RequestMapping("/")
 public class UserController {
@@ -54,12 +58,12 @@ public class UserController {
         this.jwtUtils = jwtUtils;
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<List<UserModel>> getProjects() {
-        List<UserModel> userModels = userService.getAllUsers();
-        return new ResponseEntity<>(userModels, HttpStatus.OK);
-    }
-
+    /**
+     * Requirement 2, handle and process HTTP requests.
+     * Created new user
+     * @param userDto object with new user information
+     * @return created UserModel object
+     */
     @PostMapping(path = "/createUser", consumes = "application/json", produces = "application/json")
     public ResponseEntity<UserModel> addMember(@RequestBody @Valid UserDto userDto) {
         UserModel existingUser = userService.findByUserName(userDto.getUserName());
@@ -73,6 +77,12 @@ public class UserController {
         return new ResponseEntity<>(savedUserModel, HttpStatus.OK);
     }
 
+    /**
+     * Requirement 2, handle and process HTTP requests.
+     * Authenticates existing user
+     * @param authRequest object with username and password
+     * @return AuthResponse with jwt authentication token
+     */
     @PostMapping(path = "/authenticate", consumes = "application/json", produces = "application/json")
     public ResponseEntity<AuthResponse> authenticateUser(@RequestBody @Valid AuthRequest authRequest) {
         AuthResponse authResponse = new AuthResponse();
@@ -90,12 +100,24 @@ public class UserController {
         return new ResponseEntity<>(authResponse, HttpStatus.OK);
     }
 
+    /**
+     * Requirement 2, handle and process HTTP requests.
+     * Gets user object by user id
+     * @param id of the user
+     * @return UserModel object
+     */
     @GetMapping("/user/{id}")
     public ResponseEntity<UserModel> getUser(@PathVariable("id") int id) {
         UserModel userModel = userService.getUserUserById(id);
         return new ResponseEntity<>(userModel, HttpStatus.OK);
     }
 
+    /**
+     * Requirement 2, handle and process HTTP requests.
+     * Updates existing user
+     * @param userModelDto object with updated user information
+     * @return updated UserModel object
+     */
     @PostMapping(path = "/updateUser", consumes = "application/json", produces = "application/json")
     public ResponseEntity<UserModel> addMember(@RequestBody @Valid UserModelDto userModelDto) {
         UserModel userModelDtoRequest = modelMapper.map(userModelDto, UserModel.class);
@@ -103,12 +125,25 @@ public class UserController {
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
+    /**
+     * Requirement 2, handle and process HTTP requests.
+     * Saves user picture
+     * @param picture file
+     * @param userId user id
+     * @return boolean
+     */
     @PostMapping("/addUserPicture/{userId}")
     public ResponseEntity<Boolean> addPhoto(@RequestParam("picture") MultipartFile picture, @PathVariable Integer userId) {
         pictureService.addPicture("User picture for user id " + userId, picture, userId);
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
+    /**
+     * Requirement 2, handle and process HTTP requests.
+     * Gets existing user picture
+     * @param id user id
+     * @return encoded string containing user picture
+     */
     @GetMapping("/getUserPicture/{id}")
     public ResponseEntity<ImageDTO> getPicture(@PathVariable Integer id) {
         Picture picture = pictureService.getPictureByUserId(id);
@@ -122,6 +157,12 @@ public class UserController {
         return new ResponseEntity<>(imageDTO, HttpStatus.OK);
     }
 
+    /**
+     * Requirement 2, handle and process HTTP requests.
+     * Deletes existing user picture
+     * @param id user id
+     * @return boolean
+     */
     @PostMapping("/deleteUserPicture/{id}")
     public ResponseEntity<Boolean> deletePicture(@PathVariable String id) {
         pictureService.deletePicture(id);

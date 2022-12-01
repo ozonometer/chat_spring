@@ -1,5 +1,9 @@
 package com.chat.chat_spring.model;
 
+/**
+ * Requirement 2, handle and process HTTP requests.
+ * Websocket send message model
+ */
 public class SendMessage {
 
     private String sendMgs;
