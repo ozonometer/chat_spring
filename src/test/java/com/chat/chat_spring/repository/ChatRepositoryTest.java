@@ -23,7 +23,7 @@ class ChatRepositoryTest {
 
     /**
      * Test case 12
-     * Requirement 1.1.2, 3.1.1, and 3.1.2
+     * Requirement 1.2.4, 3.1.1, and 3.1.2
      * @throws Exception
      */
     @Test

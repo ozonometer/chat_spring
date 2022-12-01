@@ -45,7 +45,7 @@ class PictureServiceIntTest {
 
     /**
      * Test case 27
-     * Requirement 1.4.4 and 2.1.1
+     * Requirement 1.2.5 and 2.1.1
      * @throws Exception
      */
     @Test
