@@ -23,6 +23,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,13 +34,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.*;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(UserController.class)
 @Import({SecurityConfiguration.class, CORSFilter.class})
@@ -65,6 +66,11 @@ class UserControllerTest {
     @MockBean
     private AuthenticationManager authenticationManagerTest;
 
+    /**
+     * Test case 4
+     * Requirement 1.1.1
+     * @throws Exception
+     */
     @Test
     void shouldGetAllUsers() throws Exception {
         // arrange
@@ -98,6 +104,11 @@ class UserControllerTest {
                 .andDo(print());
     }
 
+    /**
+     * Test case 5
+     * Requirement 1.4.2
+     * @throws Exception
+     */
     @Test
     void shouldAddMember() throws Exception {
         // arrange
@@ -121,6 +132,11 @@ class UserControllerTest {
                 .andDo(print());
     }
 
+    /**
+     * Test case 6
+     * Requirement 1.1.1
+     * @throws Exception
+     */
     @Test
     void shouldAuthenticateUser() throws Exception {
         // arrange
@@ -153,9 +169,53 @@ class UserControllerTest {
                         .header("Access-Control-Allow-Methods", "POST")
                         .header("Origin", "*"))
                 .andExpect(status().isOk())
+                .andExpect(content().string(containsString("\"User authenticated")))
                 .andDo(print());
     }
 
+    /**
+     * Test case 36
+     * Requirement 1.1.1, 1.3.1, and 1.3.2
+     * @throws Exception
+     */
+    @Test
+    void shouldNotAuthenticateUser() throws Exception {
+        // arrange
+        UserModel user1 = new UserModel("001", 1, "test", "user", "test_user",
+                "test_password","test_city", "test_state", "test_zipcode", "test_country");
+
+        AuthRequest authRequestTest = new AuthRequest();
+        authRequestTest.setUserName(user1.getUserName());
+        authRequestTest.setPassword(user1.getPassword());
+
+        UserDetails userDetails = new User(authRequestTest.getUserName(), authRequestTest.getPassword(), new ArrayList<>());
+
+        Map<String, Object> claimsTest = new HashMap<>();
+        Date now = new Date(System.currentTimeMillis());
+        Date util = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10);
+        String jwtToken = Jwts.builder().setClaims(claimsTest).setSubject(userDetails.getUsername()).setIssuedAt(now).setExpiration(util)
+                .signWith(SignatureAlgorithm.HS256, "secret").compact();
+
+        // act
+        when(authenticationManagerTest.authenticate(any())).thenThrow(new BadCredentialsException("exception"));
+
+        // assert
+        mockMvc.perform(post("/authenticate")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(user1))
+                        .header("Access-Control-Allow-Methods", "POST")
+                        .header("Origin", "*"))
+                .andExpect(status().isUnauthorized())
+                .andExpect(content().string(containsString("\"Invalid user")))
+                .andDo(print());
+    }
+
+    /**
+     * Test case 7
+     * Requirement 1.1.1
+     * @throws Exception
+     */
     @Test
     void shouldGetUser() throws Exception {
         // arrange
@@ -181,6 +241,11 @@ class UserControllerTest {
                 .andDo(print());
     }
 
+    /**
+     * Test case 8
+     * Requirement 1.4.2
+     * @throws Exception
+     */
     @Test
     void shouldUpdateMember() throws Exception {
         // arrange
@@ -202,6 +267,11 @@ class UserControllerTest {
                 .andDo(print());
     }
 
+    /**
+     * Test case 9
+     * Requirement 1.4.1
+     * @throws Exception
+     */
     @Test
     void shouldAddPhoto() throws Exception {
         // arrange
@@ -218,6 +288,11 @@ class UserControllerTest {
                 .andDo(print());
     }
 
+    /**
+     * Test case 10
+     * Requirement 1.4.4
+     * @throws Exception
+     */
     @Test
     void shouldGetPicture() throws Exception {
         // arrange
@@ -234,6 +309,11 @@ class UserControllerTest {
                 .andDo(print());
     }
 
+    /**
+     * Test case 11
+     * Requirement 1.4.2
+     * @throws Exception
+     */
     @Test
     void shouldDeletePicture() throws Exception {
         // arrange

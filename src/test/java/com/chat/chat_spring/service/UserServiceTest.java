@@ -44,6 +44,11 @@ class UserServiceTest {
         userList.add(user3);
     }
 
+    /**
+     * Test case 29
+     * Requirement 1.1.1 and 2.1.1
+     * @throws Exception
+     */
     @Test
     void shouldGetAllUsers() {
         // arrange
@@ -56,6 +61,11 @@ class UserServiceTest {
         assertEquals(userList, resultList);
     }
 
+    /**
+     * Test case 30
+     * Requirement 1.4.2 and 2.1.1
+     * @throws Exception
+     */
     @Test
     void shouldSaveOrUpdate() {
         // arrange
@@ -69,8 +79,13 @@ class UserServiceTest {
         assertEquals(newUser, resultUser);
     }
 
+    /**
+     * Test case 31
+     * Requirement 1.1.1 and 2.1.1
+     * @throws Exception
+     */
     @Test
-    void shouldGetUserUserById() {
+    void shouldGetUserByUserId() {
         // arrange
 
         // act
@@ -87,6 +102,11 @@ class UserServiceTest {
         assertEquals(user3, result3);
     }
 
+    /**
+     * Test case 32
+     * Requirement 1.1.1 and 2.1.1
+     * @throws Exception
+     */
     @Test
     void shouldFindByUserName() {
         // arrange
@@ -105,6 +125,11 @@ class UserServiceTest {
         assertEquals(user3, result3);
     }
 
+    /**
+     * Test case 33
+     * Requirement 1.4.2 and 2.1.1
+     * @throws Exception
+     */
     @Test
     void shouldUpdateUser() {
         // arrange
@@ -118,20 +143,31 @@ class UserServiceTest {
         assertEquals(user1, resultUser);
     }
 
+    /**
+     * Test case 34
+     * Requirement 1.4.2 and 2.1.1
+     * @throws Exception
+     */
     @Test
     void shouldFindUserMaxId() {
         // arrange
+        UserModel last = userList.get(userList.size()-1);
 
         // act
-        when(userRepositoryTest.findFirstByOrderByUserIdDesc()).thenReturn(userList.get(userList.size()-1));
+        when(userRepositoryTest.findFirstByOrderByUserIdDesc()).thenReturn(last);
         UserModel result = userServiceTest.findUserMaxId();
 
         // assert
-        assertEquals(userList.get(userList.size()-1), result);
+        assertEquals(last, result);
     }
 
+    /**
+     * Test case 35
+     * Requirement 1.1.1 and 2.1.1
+     * @throws Exception
+     */
     @Test
-    void loadUserByUsername() {
+    void shouldLoadUserByUsername() {
         // arrange
 
         // act

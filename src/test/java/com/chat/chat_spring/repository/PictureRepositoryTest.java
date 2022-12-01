@@ -18,6 +18,11 @@ class PictureRepositoryTest {
     @Autowired
     private PictureRepository picRepoTest;
 
+    /**
+     * Test case 13
+     * Requirement 1.4.1, 3.1.1, and 3.1.2
+     * @throws Exception
+     */
     @Test
     void shouldGetPictureByUserId() {
         // arrange
@@ -29,6 +34,6 @@ class PictureRepositoryTest {
         Picture result = picRepoTest.getByUserId(1);
 
         // assert
-        assertEquals(pic.getUserId(), result.getUserId());
+        assertEquals(pic, result);
     }
 }

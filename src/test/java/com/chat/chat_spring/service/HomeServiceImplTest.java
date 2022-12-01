@@ -43,6 +43,11 @@ class HomeServiceImplTest {
         threadList.add(thread3);
     }
 
+    /**
+     * Test case 21
+     * Requirement 1.1.2 and 2.1.1
+     * @throws Exception
+     */
     @Test
     void shouldGetThreads() {
         // arrange
@@ -55,6 +60,11 @@ class HomeServiceImplTest {
         assertEquals(threadList, resultList);
     }
 
+    /**
+     * Test case 22
+     * Requirement 1.2.1 and 2.1.1
+     * @throws Exception
+     */
     @Test
     void shouldFindThreadMaxId() {
         // arrange
@@ -67,6 +77,11 @@ class HomeServiceImplTest {
         assertEquals(result, thread1);
     }
 
+    /**
+     * Test case 23
+     * Requirement 1.1.2 and 2.1.1
+     * @throws Exception
+     */
     @Test
     void shouldFindByThreadName() {
         // arrange
@@ -79,6 +94,11 @@ class HomeServiceImplTest {
         assertEquals(result, thread1);
     }
 
+    /**
+     * Test case 24
+     * Requirement 1.2.1 and 2.1.1
+     * @throws Exception
+     */
     @Test
     void shouldSaveOrUpdateThread() {
         // arrange
@@ -91,6 +111,11 @@ class HomeServiceImplTest {
         assertEquals(result, thread1);
     }
 
+    /**
+     * Test case 37
+     * Requirement 1.4.3 and 2.1.1
+     * @throws Exception
+     */
     @Test
     void shouldGetOneByThreadId() {
         // arrange
@@ -101,5 +126,22 @@ class HomeServiceImplTest {
 
         //assert
         assertEquals(result, thread1);
+    }
+
+    /**
+     * Test case 25
+     * Requirement 1.1.2 and 2.1.1
+     * @throws Exception
+     */
+    @Test
+    void shouldGetAllByKeyword() {
+        //arrange
+
+        // act
+        when(chatRepositoryTest.findAllByThreadName(any())).thenReturn(threadList);
+        List<ChatThread> result = homeServiceTest.getAllByKeyword("keyword");
+
+        // assert
+        assertEquals(result, threadList);
     }
 }

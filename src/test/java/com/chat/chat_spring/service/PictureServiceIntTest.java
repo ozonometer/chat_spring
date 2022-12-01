@@ -24,8 +24,13 @@ class PictureServiceIntTest {
     @InjectMocks
     private PictureServiceInt pictureServiceIntTest;
 
+    /**
+     * Test case 26
+     * Requirement 1.4.1 and 2.1.1
+     * @throws Exception
+     */
     @Test
-    void addPicture() {
+    void shouldAddPicture() {
         // arrange
         Picture pic = new Picture(null, 1, "test picture", new Binary(new byte[123456]));
 
@@ -38,6 +43,11 @@ class PictureServiceIntTest {
         assertEquals(pic.getId(), result);
     }
 
+    /**
+     * Test case 27
+     * Requirement 1.4.4 and 2.1.1
+     * @throws Exception
+     */
     @Test
     void shouldGetPictureByUserId() {
         // arrange
@@ -51,8 +61,13 @@ class PictureServiceIntTest {
         assertEquals(pic, result);
     }
 
+    /**
+     * Test case 28
+     * Requirement 1.4.2 and 2.1.1
+     * @throws Exception
+     */
     @Test
-    void deletePicture() {
+    void shouldDeletePicture() {
         // arrange
         Picture pic = new Picture("001", 1, "test picture", new Binary(new byte[123456]));
 
