@@ -115,7 +115,7 @@ class HomeControllerTest {
 
     /**
      * Test case 3
-     * Requirement 1.1.2
+     * Requirement 1.2.4
      * @throws Exception
      */
     @Test
@@ -142,7 +142,7 @@ class HomeControllerTest {
 
     /**
      * Test case 19
-     * Requirement 1.1.2
+     * Requirement 1.2.2
      * @throws Exception
      */
     @Test
@@ -175,7 +175,7 @@ class HomeControllerTest {
 
     /**
      * Test case 20
-     * Requirement 1.1.2
+     * Requirement 1.2.2
      * @throws Exception
      */
     @Test

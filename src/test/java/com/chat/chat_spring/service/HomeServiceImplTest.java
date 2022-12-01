@@ -79,7 +79,7 @@ class HomeServiceImplTest {
 
     /**
      * Test case 23
-     * Requirement 1.1.2 and 2.1.1
+     * Requirement 1.2.2 and 2.1.1
      * @throws Exception
      */
     @Test
@@ -96,7 +96,7 @@ class HomeServiceImplTest {
 
     /**
      * Test case 24
-     * Requirement 1.2.1 and 2.1.1
+     * Requirement 1.2.3 and 2.1.1
      * @throws Exception
      */
     @Test
@@ -113,7 +113,7 @@ class HomeServiceImplTest {
 
     /**
      * Test case 37
-     * Requirement 1.4.3 and 2.1.1
+     * Requirement 1.2.2 and 2.1.1
      * @throws Exception
      */
     @Test
@@ -130,7 +130,7 @@ class HomeServiceImplTest {
 
     /**
      * Test case 25
-     * Requirement 1.1.2 and 2.1.1
+     * Requirement 1.2.2 and 2.1.1
      * @throws Exception
      */
     @Test

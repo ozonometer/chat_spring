@@ -63,7 +63,7 @@ class UserServiceTest {
 
     /**
      * Test case 30
-     * Requirement 1.4.2 and 2.1.1
+     * Requirement 1.1.2 and 2.1.1
      * @throws Exception
      */
     @Test

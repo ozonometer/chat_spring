@@ -290,7 +290,7 @@ class UserControllerTest {
 
     /**
      * Test case 10
-     * Requirement 1.4.4
+     * Requirement 1.2.5
      * @throws Exception
      */
     @Test

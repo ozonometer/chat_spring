@@ -23,7 +23,7 @@ class UserRepositoryTest {
 
     /**
      * Test case 14
-     * Requirement 1.1.1, 3.1.1, and 3.1.2
+     * Requirement 1.1.2, 3.1.1, and 3.1.2
      * @throws Exception
      */
     @Test
@@ -76,7 +76,7 @@ class UserRepositoryTest {
 
     /**
      * Test case 16
-     * Requirement 1.1.1, 3.1.1, and 3.1.2
+     * Requirement 1.1.2, 3.1.1, and 3.1.2
      * @throws Exception
      */@Test
     void shouldFindUserByUserId() {
@@ -95,7 +95,7 @@ class UserRepositoryTest {
 
     /**
      * Test case 17
-     * Requirement 1.1.1, 3.1.1, and 3.1.2
+     * Requirement 1.1.2, 3.1.1, and 3.1.2
      * @throws Exception
      */@Test
     void shouldFindFirstByUserName() {
@@ -118,7 +118,7 @@ class UserRepositoryTest {
 
     /**
      * Test case 18
-     * Requirement 1.1.1, 3.1.1, and 3.1.2
+     * Requirement 1.1.2, 3.1.1, and 3.1.2
      * @throws Exception
      */@Test
     void shouldFindFirstByOrderByUserIdDesc() {
